@@ -19,6 +19,7 @@ export default tseslint.config(
       'test-results/**',
       'scripts/**',
       '.claude/**',
+      'samples/**',
     ],
   },
   js.configs.recommended,

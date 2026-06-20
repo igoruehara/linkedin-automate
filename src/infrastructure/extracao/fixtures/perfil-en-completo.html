@@ -1,59 +1,64 @@
 <!--
-  FIXTURE PROVISÓRIA (0003) — dados FAKE, rótulos em inglês. Mesma estrutura da PT; só os rótulos
-  de cabeçalho mudam (as âncoras #about/#experience/#education/#skills são language-neutral).
-  Verifica AC-2: chaves canônicas iguais às da PT + idiomaDetectado = EN.
+  FIXTURE — dados FAKE, rótulos em inglês. Mesma estrutura da PT; só os cabeçalhos (h2) mudam —
+  as âncoras componentkey (…Rg<Secao>) são language-neutral. Verifica AC-2: chaves canônicas
+  iguais às da PT + idiomaDetectado = EN.
 -->
 <main>
-  <section class="pv-top-card">
-    <h1>John Carter</h1>
-    <div class="text-body-medium break-words">Software Engineer | TypeScript &amp; Cloud</div>
-    <img
-      class="pv-top-card-profile-picture__image"
-      src="https://media.licdn.com/dms/image/fake/profile-photo.jpg"
-      alt="John Carter photo"
-    />
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgTopcard">
+    <a componentkey="topcard-logo-image-referencekey">
+      <div aria-label="Profile photo">
+        <figure aria-hidden="true">
+          <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displayphoto-scale_100_100/0/0?t=photo" alt="" />
+        </figure>
+      </div>
+    </a>
+    <div>
+      <div><div><div><h2>John Carter</h2></div></div></div>
+      <p>Software Engineer | TypeScript &amp; Cloud</p>
+    </div>
   </section>
 
-  <section>
-    <div id="about"></div>
-    <h2><span aria-hidden="true">About</span></h2>
-    <div class="display-flex full-width">
-      <div class="inline-show-more-text">
-        <span aria-hidden="true">Software engineer with 8 years building web products. Passionate about DDD, testing and mentoring.</span>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgAbout">
+    <div><h2>About</h2></div>
+    <p><span data-testid="expandable-text-box">Software engineer with 8 years building web products.</span></p>
+  </section>
+
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgExperienceTopLevelSection">
+    <div><h2>Experience</h2></div>
+    <div data-testid="profile_ExperienceTopLevelSection_fake">
+      <div componentkey="entity-collection-item--a1">
+        <a href="https://www.linkedin.com/company/1/"><figure><img src="https://media.licdn.com/dms/image/v2/FAKE/company-logo_100_100/0/0?t=logo" alt="" /></figure></a>
+        <div>
+          <div><div>Senior Software Engineer</div></div>
+          <p>ACME Technology · Full-time</p>
+          <p>2021 - Present · 3 yrs</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div id="experience"></div>
-    <h2><span aria-hidden="true">Experience</span></h2>
-    <ul>
-      <li class="artdeco-list__item">
-        <span class="t-bold"><span aria-hidden="true">Senior Software Engineer</span></span>
-        <span class="t-normal"><span aria-hidden="true">ACME Technology</span></span>
-        <span class="t-black--light"><span aria-hidden="true">2021 - Present</span></span>
-      </li>
-    </ul>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgEducationTopLevelSection">
+    <div><h2>Education</h2></div>
+    <div data-testid="profile_EducationTopLevelSection_fake">
+      <div componentkey="entity-collection-item--e1">
+        <div>
+          <div><div>Federal University</div></div>
+          <p>B.Sc. in Computer Science</p>
+          <p>2014 - 2018</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <div id="education"></div>
-    <h2><span aria-hidden="true">Education</span></h2>
-    <ul>
-      <li class="artdeco-list__item">
-        <span class="t-bold"><span aria-hidden="true">Federal University</span></span>
-        <span class="t-normal"><span aria-hidden="true">B.Sc. in Computer Science</span></span>
-        <span class="t-black--light"><span aria-hidden="true">2014 - 2018</span></span>
-      </li>
-    </ul>
-  </section>
-
-  <section>
-    <div id="skills"></div>
-    <h2><span aria-hidden="true">Skills</span></h2>
-    <ul>
-      <li class="artdeco-list__item"><span class="t-bold"><span aria-hidden="true">TypeScript</span></span></li>
-      <li class="artdeco-list__item"><span class="t-bold"><span aria-hidden="true">React</span></span></li>
-    </ul>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgSkills">
+    <div><h2>Skills</h2></div>
+    <div data-testid="profile_Skills_fake">
+      <div componentkey="entity-collection-item--s1">
+        <div componentkey="com.linkedin.sdui.profile.skill(FAKE1)"><p><span>TypeScript</span></p></div>
+      </div>
+      <div componentkey="entity-collection-item--s2">
+        <div componentkey="com.linkedin.sdui.profile.skill(FAKE2)"><p><span>React</span></p></div>
+      </div>
+    </div>
   </section>
 </main>

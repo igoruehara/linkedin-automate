@@ -1,13 +1,15 @@
-<!--
-  FIXTURE PROVISÓRIA (0003) — AC-6: avatar padrão (SVG fantasma, sem <img> de foto real)
-  ⇒ FOTO AUSENTE. Placeholder do LinkedIn não usa a img de foto real.
--->
+<!-- FIXTURE (estrutura real) — AC-6: avatar padrão (SVG fantasma), capa presente, mas SEM
+     img profile-displayphoto ⇒ FOTO AUSENTE. -->
 <main>
-  <section class="pv-top-card">
-    <h1>Ana Souza</h1>
-    <div class="text-body-medium break-words">Engenheira de Software</div>
-    <div class="pv-top-card-profile-picture">
-      <svg class="ghost-person" aria-hidden="true" focusable="false"></svg>
-    </div>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgTopcard">
+    <figure>
+      <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displaybackgroundimage-shrink_200_800/0/0?t=cover" alt="Foto de capa" />
+    </figure>
+    <a componentkey="topcard-logo-image-referencekey">
+      <div aria-label="Foto do perfil"><figure aria-hidden="true">
+        <svg id="person-accent-4" aria-hidden="true"></svg>
+      </figure></div>
+    </a>
+    <div><div><div><div><h2>Ana Souza</h2></div></div></div><p>Engenheira de Software</p></div>
   </section>
 </main>

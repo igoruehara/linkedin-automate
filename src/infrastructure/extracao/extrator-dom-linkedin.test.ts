@@ -64,7 +64,7 @@ describe('ExtratorDomLinkedin (ACL) — fixtures provisórias', () => {
 
   it('AC-5: texto recolhido é capturado por completo, sem clicar em "ver mais"', () => {
     const doc = carregar(htmlSobreRecolhido);
-    const botao = doc.querySelector<HTMLButtonElement>('button.inline-show-more-text__button');
+    const botao = doc.querySelector<HTMLButtonElement>('[data-testid="expandable-text-button"]');
     const spy = vi.spyOn(botao!, 'click');
 
     const sobre = extrator.extrair(doc).secoes.get(TipoDeSecao.SOBRE);

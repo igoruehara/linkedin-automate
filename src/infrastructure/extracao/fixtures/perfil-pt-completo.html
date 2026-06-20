@@ -1,66 +1,106 @@
 <!--
-  FIXTURE PROVISÓRIA (0003, decisão (b)) — dados FAKE, estrutura derivada de padrões do LinkedIn.
-  NÃO é HTML real e NÃO contém PII. Espelha os seletores de ../seletores.ts. Recalibrar com
-  amostra real via dom-extraction-auditor. Golden: ./perfil-pt-completo.expected.json
+  FIXTURE — dados FAKE, estrutura CALIBRADA contra HTML real do LinkedIn (perfil "SDUI", 2026-06).
+  Hooks estáveis: componentkey (…Rg<Secao>, entity-collection-item-…) e data-testid. As classes
+  hasheadas reais foram omitidas de propósito (são voláteis). NÃO contém PII.
+  Golden: ./perfil-pt-completo.expected.json
 -->
 <main>
-  <section class="pv-top-card">
-    <h1>Ana Souza</h1>
-    <div class="text-body-medium break-words">Engenheira de Software | TypeScript &amp; Cloud</div>
-    <img
-      class="pv-top-card-profile-picture__image"
-      src="https://media.licdn.com/dms/image/fake/profile-photo.jpg"
-      alt="Foto de Ana Souza"
-    />
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgTopcard">
+    <figure>
+      <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displaybackgroundimage-shrink_200_800/0/0?e=1&amp;v=beta&amp;t=cover" alt="Foto de capa" />
+    </figure>
+    <a componentkey="topcard-logo-image-referencekey">
+      <div aria-label="Foto do perfil">
+        <figure aria-hidden="true">
+          <svg id="person-accent-4" aria-hidden="true"></svg>
+          <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displayphoto-scale_100_100/0/0?e=1&amp;v=beta&amp;t=photo" alt="" />
+        </figure>
+      </div>
+    </a>
+    <div>
+      <div><div><div><h2>Ana Souza</h2></div></div></div>
+      <p>Engenheira de Software | TypeScript &amp; Cloud</p>
+      <p>ACME Tecnologia · Universidade Federal</p>
+      <div><p>São Paulo, São Paulo, Brasil</p></div>
+    </div>
   </section>
 
-  <section>
-    <div id="about"></div>
-    <h2><span aria-hidden="true">Sobre</span></h2>
-    <div class="display-flex full-width">
-      <div class="inline-show-more-text">
-        <span aria-hidden="true">Engenheira de software com 8 anos construindo produtos web. Apaixonada por DDD, testes e mentoria.</span>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgAbout">
+    <div>
+      <h2>Sobre</h2>
+      <a href="https://www.linkedin.com/in/ana/edit/forms/summary/new/" aria-label="Editar sobre"><span></span></a>
+    </div>
+    <p>
+      <span data-testid="expandable-text-box">Engenheira de software com 8 anos construindo produtos web.<br><br>Apaixonada por DDD, testes e mentoria.</span>
+    </p>
+  </section>
+
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgExperienceTopLevelSection">
+    <div>
+      <h2>Experiência</h2>
+    </div>
+    <div data-testid="profile_ExperienceTopLevelSection_fake">
+      <div componentkey="entity-collection-item--a1">
+        <a href="https://www.linkedin.com/company/1/"><figure><img src="https://media.licdn.com/dms/image/v2/FAKE/company-logo_100_100/0/0?t=logo" alt="" /></figure></a>
+        <div>
+          <div><div>Engenheira de Software Sênior</div></div>
+          <p>ACME Tecnologia · Tempo integral</p>
+          <p>2021 - Presente · 3 anos</p>
+          <p><a href="https://www.linkedin.com/in/ana/overlay/skills/1/"><span aria-hidden="true">TypeScript</span><span>TypeScript</span></a></p>
+        </div>
+      </div>
+      <div componentkey="entity-collection-item--a2">
+        <hr role="presentation" />
+        <div>
+          <div><div>Desenvolvedora Full Stack</div></div>
+          <p>Beta Software · Tempo integral</p>
+          <p>2018 - 2021 · 3 anos</p>
+        </div>
+      </div>
+    </div>
+    <a href="https://www.linkedin.com/in/ana/details/experience/" aria-label="Exibir todas as experiências"><span>Exibir tudo</span></a>
+  </section>
+
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgEducationTopLevelSection">
+    <div>
+      <h2>Formação acadêmica</h2>
+    </div>
+    <div data-testid="profile_EducationTopLevelSection_fake">
+      <div componentkey="entity-collection-item--e1">
+        <a href="https://www.linkedin.com/school/1/"><figure><img src="https://media.licdn.com/dms/image/v2/FAKE/company-logo_100_100/0/0?t=logo" alt="" /></figure></a>
+        <div>
+          <div><div>Universidade Federal</div></div>
+          <p>Bacharelado em Ciência da Computação</p>
+          <p>2014 - 2018</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div id="experience"></div>
-    <h2><span aria-hidden="true">Experiência</span></h2>
-    <ul>
-      <li class="artdeco-list__item">
-        <span class="t-bold"><span aria-hidden="true">Engenheira de Software Sênior</span></span>
-        <span class="t-normal"><span aria-hidden="true">ACME Tecnologia</span></span>
-        <span class="t-black--light"><span aria-hidden="true">2021 - Presente</span></span>
-      </li>
-      <li class="artdeco-list__item">
-        <span class="t-bold"><span aria-hidden="true">Desenvolvedora Full Stack</span></span>
-        <span class="t-normal"><span aria-hidden="true">Beta Software</span></span>
-        <span class="t-black--light"><span aria-hidden="true">2018 - 2021</span></span>
-      </li>
-    </ul>
-  </section>
-
-  <section>
-    <div id="education"></div>
-    <h2><span aria-hidden="true">Formação acadêmica</span></h2>
-    <ul>
-      <li class="artdeco-list__item">
-        <span class="t-bold"><span aria-hidden="true">Universidade Federal</span></span>
-        <span class="t-normal"><span aria-hidden="true">Bacharelado em Ciência da Computação</span></span>
-        <span class="t-black--light"><span aria-hidden="true">2014 - 2018</span></span>
-      </li>
-    </ul>
-  </section>
-
-  <section>
-    <div id="skills"></div>
-    <h2><span aria-hidden="true">Conhecimentos e competências</span></h2>
-    <ul>
-      <li class="artdeco-list__item"><span class="t-bold"><span aria-hidden="true">TypeScript</span></span></li>
-      <li class="artdeco-list__item"><span class="t-bold"><span aria-hidden="true">React</span></span></li>
-      <li class="artdeco-list__item"><span class="t-bold"><span aria-hidden="true">Domain-Driven Design</span></span></li>
-      <li class="artdeco-list__item"><span class="t-bold"><span aria-hidden="true">Vitest</span></span></li>
-    </ul>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgSkills">
+    <div>
+      <h2>Conhecimentos e competências</h2>
+    </div>
+    <div data-testid="profile_Skills_fake">
+      <div componentkey="entity-collection-item--s1">
+        <div componentkey="com.linkedin.sdui.profile.skill(FAKE1)"><p><span aria-hidden="true">TypeScript</span><span>TypeScript</span></p></div>
+      </div>
+      <div componentkey="entity-collection-item--s2">
+        <hr role="presentation" />
+        <div componentkey="com.linkedin.sdui.profile.skill(FAKE2)">
+          <p><span aria-hidden="true">React</span><span>React</span></p>
+          <div role="list"><div role="listitem"><figure><img src="https://media.licdn.com/dms/image/v2/FAKE/company-logo_100_100/0/0?t=logo" alt="" /></figure><p><span>Usada na ACME Tecnologia</span></p></div></div>
+        </div>
+      </div>
+      <div componentkey="entity-collection-item--s3">
+        <hr role="presentation" />
+        <div componentkey="com.linkedin.sdui.profile.skill(FAKE3)"><p><span aria-hidden="true">Domain-Driven Design</span><span>Domain-Driven Design</span></p></div>
+      </div>
+      <div componentkey="entity-collection-item--s4">
+        <hr role="presentation" />
+        <div componentkey="com.linkedin.sdui.profile.skill(FAKE4)"><p><span aria-hidden="true">Vitest</span><span>Vitest</span></p></div>
+      </div>
+    </div>
+    <a href="https://www.linkedin.com/in/ana/details/skills/" aria-label="Exibir todas as competências"><span>Exibir tudo</span></a>
   </section>
 </main>

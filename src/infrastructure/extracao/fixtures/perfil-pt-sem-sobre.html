@@ -1,20 +1,27 @@
-<!-- FIXTURE PROVISÓRIA (0003) — AC-3: sem a Seção "Sobre". As demais continuam corretas. -->
+<!-- FIXTURE (estrutura real) — AC-3: sem a Seção "Sobre" (sem componentkey …RgAbout). Demais OK. -->
 <main>
-  <section class="pv-top-card">
-    <h1>Ana Souza</h1>
-    <div class="text-body-medium break-words">Engenheira de Software</div>
-    <img class="pv-top-card-profile-picture__image" src="https://media.licdn.com/dms/image/fake/p.jpg" alt="" />
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgTopcard">
+    <a componentkey="topcard-logo-image-referencekey">
+      <div aria-label="Foto do perfil"><figure aria-hidden="true">
+        <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displayphoto-scale_100_100/0/0?t=photo" alt="" />
+      </figure></div>
+    </a>
+    <div>
+      <div><div><div><h2>Ana Souza</h2></div></div></div>
+      <p>Engenheira de Software</p>
+    </div>
   </section>
 
-  <section>
-    <div id="experience"></div>
-    <h2><span aria-hidden="true">Experiência</span></h2>
-    <ul>
-      <li class="artdeco-list__item">
-        <span class="t-bold"><span aria-hidden="true">Engenheira de Software Sênior</span></span>
-        <span class="t-normal"><span aria-hidden="true">ACME Tecnologia</span></span>
-        <span class="t-black--light"><span aria-hidden="true">2021 - Presente</span></span>
-      </li>
-    </ul>
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgExperienceTopLevelSection">
+    <div><h2>Experiência</h2></div>
+    <div data-testid="profile_ExperienceTopLevelSection_fake">
+      <div componentkey="entity-collection-item--a1">
+        <div>
+          <div><div>Engenheira de Software Sênior</div></div>
+          <p>ACME Tecnologia · Tempo integral</p>
+          <p>2021 - Presente · 3 anos</p>
+        </div>
+      </div>
+    </div>
   </section>
 </main>

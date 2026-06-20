@@ -12,7 +12,7 @@
       "estado": "PRESENTE",
       "conteudo": {
         "tipo": "texto",
-        "valor": "Engenheira de software com 8 anos construindo produtos web. Apaixonada por DDD, testes e mentoria."
+        "valor": "Engenheira de software com 8 anos construindo produtos web.\nApaixonada por DDD, testes e mentoria."
       }
     },
     "EXPERIENCIA": {
@@ -21,8 +21,8 @@
       "conteudo": {
         "tipo": "itens",
         "itens": [
-          { "titulo": "Engenheira de Software Sênior", "subtitulo": "ACME Tecnologia", "periodo": "2021 - Presente" },
-          { "titulo": "Desenvolvedora Full Stack", "subtitulo": "Beta Software", "periodo": "2018 - 2021" }
+          { "titulo": "Engenheira de Software Sênior", "subtitulo": "ACME Tecnologia · Tempo integral", "periodo": "2021 - Presente · 3 anos" },
+          { "titulo": "Desenvolvedora Full Stack", "subtitulo": "Beta Software · Tempo integral", "periodo": "2018 - 2021 · 3 anos" }
         ]
       }
     },
@@ -32,11 +32,7 @@
       "conteudo": {
         "tipo": "itens",
         "itens": [
-          {
-            "titulo": "Universidade Federal",
-            "subtitulo": "Bacharelado em Ciência da Computação",
-            "periodo": "2014 - 2018"
-          }
+          { "titulo": "Universidade Federal", "subtitulo": "Bacharelado em Ciência da Computação", "periodo": "2014 - 2018" }
         ]
       }
     },

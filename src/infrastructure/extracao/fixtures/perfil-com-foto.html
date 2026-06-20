@@ -1,12 +1,16 @@
-<!-- FIXTURE PROVISÓRIA (0003) — AC-6: foto real (img com src de mídia) ⇒ FOTO PRESENTE. -->
+<!-- FIXTURE (estrutura real) — AC-6: foto real (img profile-displayphoto) ⇒ FOTO PRESENTE.
+     Inclui a imagem de capa (displaybackgroundimage) para garantir que ela NÃO é confundida. -->
 <main>
-  <section class="pv-top-card">
-    <h1>Ana Souza</h1>
-    <div class="text-body-medium break-words">Engenheira de Software</div>
-    <img
-      class="pv-top-card-profile-picture__image"
-      src="https://media.licdn.com/dms/image/fake/profile-photo.jpg"
-      alt="Foto de Ana Souza"
-    />
+  <section componentkey="com.linkedin.sdui.profile.card.refFAKERgTopcard">
+    <figure>
+      <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displaybackgroundimage-shrink_200_800/0/0?t=cover" alt="Foto de capa" />
+    </figure>
+    <a componentkey="topcard-logo-image-referencekey">
+      <div aria-label="Foto do perfil"><figure aria-hidden="true">
+        <svg id="person-accent-4" aria-hidden="true"></svg>
+        <img src="https://media.licdn.com/dms/image/v2/FAKE/profile-displayphoto-scale_100_100/0/0?t=photo" alt="" />
+      </figure></div>
+    </a>
+    <div><div><div><div><h2>Ana Souza</h2></div></div></div><p>Engenheira de Software</p></div>
   </section>
 </main>
