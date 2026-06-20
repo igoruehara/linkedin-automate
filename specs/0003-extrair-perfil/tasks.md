@@ -15,11 +15,11 @@ alwaysApply: false
 | 1  | Modelar agregado `Perfil` + VOs (`Seção`, `TipoDeSeção`, `EstadoDaSeção`, `Conteúdo`) + invariantes em `domain/perfil/` | AC-1,3,4,6,8 | — | `pnpm test` | **done** |
 | 2  | Definir porta `ExtratorDePerfil` + caso de uso `ExtrairPerfilDaPagina` (`application/`) | AC-1 | 1 | `pnpm test` | **done** |
 | 3  | Configurar jsdom no Vitest p/ testes de `infrastructure/` (env por pasta) `[P]` | AC-1 | — | `pnpm test` | **done** |
-| 4  | Coletar **fixtures** PT/EN (completo, sem-sobre, sobre-vazio, sobre-recolhido, com/sem-foto) **+ golden `*.expected.json`** (oráculo dos valores) | AC-1..6 | — | revisão + `pnpm test` | todo |
-| 5  | ACL `ExtratorDomLinkedin`: seletores + detecção de idioma (PT/EN → chaves canônicas) | AC-1,2 | 1,2,3,4 | `pnpm test` | todo |
-| 6  | ACL: mapear `EstadoDaSeção` (presente/vazia/ausente) pela matriz de decisão | AC-3,4 | 5 | `pnpm test` | todo |
-| 7  | ACL: estratégia "ver mais" — texto pleno do nó + expandir recolhido | AC-5 | 5 | `pnpm test` + `pnpm test:e2e` | todo |
-| 8  | ACL: Foto real vs placeholder | AC-6 | 5 | `pnpm test` | todo |
+| 4  | Coletar **fixtures** PT/EN (completo, sem-sobre, sobre-vazio, sobre-recolhido, com/sem-foto) **+ golden `*.expected.json`** (oráculo dos valores) | AC-1..6 | — | revisão + `pnpm test` | **done (provisórias)** |
+| 5  | ACL `ExtratorDomLinkedin`: seletores + detecção de idioma (PT/EN → chaves canônicas) | AC-1,2 | 1,2,3,4 | `pnpm test` | **done (seletores provisórios)** |
+| 6  | ACL: mapear `EstadoDaSeção` (presente/vazia/ausente) pela matriz de decisão | AC-3,4 | 5 | `pnpm test` | **done** |
+| 7  | ACL: estratégia "ver mais" — texto pleno do nó + expandir recolhido | AC-5 | 5 | `pnpm test` + `pnpm test:e2e` | parcial (texto pleno do nó + "não clica" ✓; expandir/E2E todo) |
+| 8  | ACL: Foto real vs placeholder | AC-6 | 5 | `pnpm test` | **done** |
 | 9  | Wire content script chama `ExtrairPerfilDaPagina` (sem enviar nada) + E2E leitura/zero egress | AC-7 | 5 | `pnpm test:e2e` | todo |
 | 10 | Atualizar `glossary` + `context-map` + checagem `privacy-guard` (ADR-0006) | AC-7,8 | 9 | `node scripts/audit-esteira.mjs .` | todo |
 
