@@ -21,9 +21,22 @@ alwaysApply: true
   `.claude/settings.json`. Hook `Stop` e CI adiados (ver roadmap). Mapa em `docs/engineering/agentic-layer.md`.
 - **Diagramas gerados** (2026-06-20) — `docs/architecture/diagrams.md`: contexto (C4 L1), containers
   (C4 L2), mapa de bounded contexts (DDD) e fluxo-chave diagnóstico+reescrita (sequenceDiagram). Mermaid validado.
-- Feature ativa: **nenhuma ainda**.
-- **Próximo passo:** `git init` + commit da fundação; depois abrir a **1ª feature** com
-  `/nova-feature` → *Scaffolding da extensão (WXT + React + side panel "hello") + hook `Stop`*.
+- **Git inicializado e publicado** (2026-06-20) — repo em https://github.com/igoruehara/linkedin-automate
+  (branch `main`, commit `f154acc`). Identidade local: igoruehara / igornoriaqui@gmail.com.
+- **Feature `0002-setup-extensao`: IMPLEMENTADA** (todas as 9 tasks `done`; AC-1..AC-6 verdes por
+  gate executável). Walking skeleton WXT + React rodando: build MV3, side panel placeholder,
+  content script só LinkedIn, camadas DDD com regra de fronteira no lint, Vitest + Playwright (com
+  teste de zero egress). Hook `Stop` (lint+test) ativo. **Nada commitado ainda** (a pedido).
+- **Bateria de gates (todos ✅):** `pnpm lint` · `pnpm typecheck` · `pnpm test` · `pnpm test:e2e` ·
+  `pnpm build` · `audit-esteira` · `validate-mermaid`.
+- **Próximo passo:** **commitar a feature 0002** (sugiro um commit por já que a implementação foi em
+  ondas, ou commits por bloco); depois abrir a **feature 0003 — Extração do Perfil** (DOM → `Perfil`
+  via ACL + fixtures PT/EN) com `/nova-feature`. Os subagentes `dom-extraction-auditor` e
+  `privacy-guard` entram em ação lá.
+- **Toolchain/decisões de impl.:** pnpm via `npm i -g pnpm` (10.34.4). WXT 0.20.26 / Vite 8 / React 19 /
+  eslint 10 / vitest 4 / playwright 1.61. `srcDir: 'src'`; entrypoints finos em `src/entrypoints/`
+  delegam para `src/interfaces/`. `tsconfig` precisou de `jsx: react-jsx` (o `.wxt/tsconfig` não o injeta).
+  Lint ignora a tooling SDD vendada (`scripts/**`, `.claude/**`).
 
 ## Decisões recentes
 > Resumo cronológico. Se for difícil de reverter, vire um ADR e linke aqui.
