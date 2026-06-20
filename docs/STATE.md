@@ -10,7 +10,7 @@ alwaysApply: true
 > todo. Diferente do **ADR** (decisão durável e imutável). Decisão estrutural → ADR; estado do
 > trabalho → aqui. Atualize ao **pausar/encerrar**; leia ao **retomar**. Use a skill `/handoff`.
 
-**Última atualização:** 2026-06-20 por Igor
+**Última atualização:** 2026-06-20 por Igor — **0003 PAUSADA** após tasks #1–#2 (aguarda amostra de HTML real)
 
 ## Em andamento / próximo passo
 > O que está aberto agora e a **próxima ação concreta** (não "continuar a feature" — diga o passo).
@@ -23,16 +23,30 @@ alwaysApply: true
   (C4 L2), mapa de bounded contexts (DDD) e fluxo-chave diagnóstico+reescrita (sequenceDiagram). Mermaid validado.
 - **Git inicializado e publicado** (2026-06-20) — repo em https://github.com/igoruehara/linkedin-automate
   (branch `main`, commit `f154acc`). Identidade local: igoruehara / igornoriaqui@gmail.com.
-- **Feature `0002-setup-extensao`: IMPLEMENTADA** (todas as 9 tasks `done`; AC-1..AC-6 verdes por
-  gate executável). Walking skeleton WXT + React rodando: build MV3, side panel placeholder,
-  content script só LinkedIn, camadas DDD com regra de fronteira no lint, Vitest + Playwright (com
-  teste de zero egress). Hook `Stop` (lint+test) ativo. **Nada commitado ainda** (a pedido).
-- **Bateria de gates (todos ✅):** `pnpm lint` · `pnpm typecheck` · `pnpm test` · `pnpm test:e2e` ·
-  `pnpm build` · `audit-esteira` · `validate-mermaid`.
-- **Próximo passo:** **commitar a feature 0002** (sugiro um commit por já que a implementação foi em
-  ondas, ou commits por bloco); depois abrir a **feature 0003 — Extração do Perfil** (DOM → `Perfil`
-  via ACL + fixtures PT/EN) com `/nova-feature`. Os subagentes `dom-extraction-auditor` e
-  `privacy-guard` entram em ação lá.
+- **Feature `0002-setup-extensao`: IMPLEMENTADA e COMMITADA** (`2a5ce9c`, sobre o `f154acc`).
+  Walking skeleton WXT + React, AC-1..AC-6 verdes. Hook `Stop` (lint+test) ativo. **Não foi feito push.**
+- **Feature ativa: `0003-extrair-perfil` (Arquitetural) — spec ABERTA / DoR cumprido.** Artefatos:
+  product, design, domain, spec (8 ACs), tasks (10). **ADR-0006** criado (expandir UI = leitura, refina o
+  ADR-0003). Glossário semeado (Perfil/Seção/TipoDeSeção/EstadoDaSeção/Conteúdo/Idioma/ExtratorDePerfil).
+  Decisões: jsdom p/ testes do ACL; chaves canônicas neutras de idioma; núcleo de 6 Seções.
+- **0003 em implementação:** **tasks #1 e #2 done** — agregado `Perfil` (`domain/perfil/`: Idioma,
+  TipoDeSecao, EstadoDaSecao, Conteudo, Secao, Perfil + invariantes) e porta `ExtratorDePerfil` +
+  caso de uso `ExtrairPerfilDaPagina` (`application/extracao/`). 12 testes verdes; lint/typecheck OK.
+  **Nada commitado ainda.** Identificadores em ASCII (TipoDeSecao), termo acentuado fica nos docs.
+- **BLOQUEIO para tasks #4–#9:** o ACL (seletores) e as fixtures precisam de **HTML real de perfil
+  do LinkedIn** (PT/EN). Não dá para inventar seletores. Decisão pendente do Igor: (a) salvar o HTML
+  do próprio perfil e fornecer, ou (b) seguir com fixtures representativas marcadas como provisórias
+  (a calibrar depois com o `dom-extraction-auditor`).
+- **PAUSADA conscientemente** (decisão do Igor): commit do progresso e retomar quando houver a amostra.
+- **Como retomar a 0003 (passo a passo):**
+  1. Capturar a amostra real: no perfil logado, DevTools Console → `copy(document.querySelector('main').outerHTML)`
+     → salvar como `amostra-perfil.html` (deixar **fora do git** — contém PII). Idealmente PT e EN.
+  2. Task #3: adicionar `jsdom` (devDep) + `// @vitest-environment jsdom` nos testes de `infrastructure/`.
+  3. Task #4: derivar das amostras as fixtures **anonimizadas** (dados fake, estrutura real) + golden `*.expected.json`.
+  4. Tasks #5–#8: implementar o ACL `ExtratorDomLinkedin` em `src/infrastructure/extracao/` (seletores,
+     idioma→chaves canônicas, EstadoDaSecao, "ver mais" com predicado do AC-5, Foto).
+  5. Tasks #9–#10: wire no content script (chama `ExtrairPerfilDaPagina`, sem egress) + E2E zero egress;
+     rodar `privacy-guard` e `dom-extraction-auditor`; atualizar DoD.
 - **Toolchain/decisões de impl.:** pnpm via `npm i -g pnpm` (10.34.4). WXT 0.20.26 / Vite 8 / React 19 /
   eslint 10 / vitest 4 / playwright 1.61. `srcDir: 'src'`; entrypoints finos em `src/entrypoints/`
   delegam para `src/interfaces/`. `tsconfig` precisou de `jsx: react-jsx` (o `.wxt/tsconfig` não o injeta).

@@ -34,7 +34,7 @@ alwaysApply: false
 
 | Upstream             | Downstream           | Padrão                  | Por quê |
 |----------------------|----------------------|-------------------------|---------|
-| LinkedIn (DOM)       | Extração de Perfil   | Anti-Corruption Layer   | O DOM é volátil e externo; o ACL traduz HTML instável → modelo `Perfil` estável e protege o domínio. |
+| LinkedIn (DOM)       | Extração de Perfil   | Anti-Corruption Layer   | O DOM é volátil e externo; o ACL traduz HTML instável → modelo `Perfil` estável e protege o domínio. Fronteira de leitura (expandir UI) em [ADR-0006](adr/0006-fronteira-leitura-expandir-ui.md). |
 | Extração de Perfil   | Curadoria            | Published Language      | `Perfil` é o contrato publicado que a Curadoria consome; muda só por decisão consciente. |
 | Curadoria            | Reescrita Assistida  | Customer/Supplier       | A Curadoria aponta quais Seções estão fracas; a Reescrita atende essa demanda. |
 | Configuração         | Reescrita Assistida  | Customer/Supplier       | A Reescrita depende da Chave de IA, do Provedor e do idioma definidos na Configuração. |
