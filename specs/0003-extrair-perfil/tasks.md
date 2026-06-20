@@ -14,7 +14,7 @@ alwaysApply: false
 |----|---------------------------------------------------------------------------------|----------|------------|-----------------------|--------|
 | 1  | Modelar agregado `Perfil` + VOs (`Seção`, `TipoDeSeção`, `EstadoDaSeção`, `Conteúdo`) + invariantes em `domain/perfil/` | AC-1,3,4,6,8 | — | `pnpm test` | **done** |
 | 2  | Definir porta `ExtratorDePerfil` + caso de uso `ExtrairPerfilDaPagina` (`application/`) | AC-1 | 1 | `pnpm test` | **done** |
-| 3  | Configurar jsdom no Vitest p/ testes de `infrastructure/` (env por pasta) `[P]` | AC-1 | — | `pnpm test` | todo |
+| 3  | Configurar jsdom no Vitest p/ testes de `infrastructure/` (env por pasta) `[P]` | AC-1 | — | `pnpm test` | **done** |
 | 4  | Coletar **fixtures** PT/EN (completo, sem-sobre, sobre-vazio, sobre-recolhido, com/sem-foto) **+ golden `*.expected.json`** (oráculo dos valores) | AC-1..6 | — | revisão + `pnpm test` | todo |
 | 5  | ACL `ExtratorDomLinkedin`: seletores + detecção de idioma (PT/EN → chaves canônicas) | AC-1,2 | 1,2,3,4 | `pnpm test` | todo |
 | 6  | ACL: mapear `EstadoDaSeção` (presente/vazia/ausente) pela matriz de decisão | AC-3,4 | 5 | `pnpm test` | todo |
