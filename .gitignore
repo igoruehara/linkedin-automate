@@ -1,0 +1,41 @@
+# Dependências
+node_modules/
+.pnp.*
+.yarn/*
+
+# Build / saída da extensão (WXT)
+dist/
+.output/
+.wxt/
+*.zip
+web-ext-artifacts/
+
+# Testes / cobertura
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# Ambiente / segredos (a Chave de IA NUNCA vai pro git)
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editores / SO
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporários
+.tmp/
+*.tsbuildinfo
