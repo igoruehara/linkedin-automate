@@ -10,7 +10,7 @@ alwaysApply: true
 > todo. Diferente do **ADR** (decisão durável e imutável). Decisão estrutural → ADR; estado do
 > trabalho → aqui. Atualize ao **pausar/encerrar**; leia ao **retomar**. Use a skill `/handoff`.
 
-**Última atualização:** 2026-06-20 por Igor — **0003**: andaime do ACL pronto (tasks #1–#6,#8 done, seletores/fixtures PROVISÓRIOS); faltam #7/#9 (E2E) e #10 + recalibração com HTML real
+**Última atualização:** 2026-06-20 por Igor — **0003**: ACL CALIBRADO com HTML real (tasks #1–#6,#8 done); faltam #7/#9 (E2E) e #10. Pushado até `7a6f792`
 
 ## Em andamento / próximo passo
 > O que está aberto agora e a **próxima ação concreta** (não "continuar a feature" — diga o passo).
@@ -29,28 +29,29 @@ alwaysApply: true
   product, design, domain, spec (8 ACs), tasks (10). **ADR-0006** criado (expandir UI = leitura, refina o
   ADR-0003). Glossário semeado (Perfil/Seção/TipoDeSeção/EstadoDaSeção/Conteúdo/Idioma/ExtratorDePerfil).
   Decisões: jsdom p/ testes do ACL; chaves canônicas neutras de idioma; núcleo de 6 Seções.
-- **0003 em implementação — tasks #1,#2,#3,#4,#5,#6,#8 done; commitadas** (`04a5da3` #1–#2; `6c83873`
-  jsdom #3; `20c3b1c` ACL #4–#6,#8). 19 testes verdes; lint/typecheck OK. **(branch ainda sem push.)**
+- **0003 em implementação — tasks #1,#2,#3,#4,#5,#6,#8 done; commitadas e PUSHADAS** (`04a5da3` #1–#2;
+  `6c83873` jsdom #3; `20c3b1c` andaime; `7a6f792` recalibração). 19 testes verdes; lint/typecheck OK.
   - #1/#2: agregado `Perfil` (`domain/perfil/`) + porta `ExtratorDePerfil` + caso de uso `ExtrairPerfilDaPagina`.
   - #3: `jsdom` (devDep) via docblock `// @vitest-environment jsdom`; default do Vitest segue `node`.
-  - #4: fixtures PT/EN em `src/infrastructure/extracao/fixtures/` (completo, sem-sobre, sobre-vazio,
-    sobre-recolhido, com/sem-foto) + golden `perfil-pt-completo.expected.json`. Carregadas via Vite `?raw`.
-  - #5/#6/#8: ACL `ExtratorDomLinkedin` + `seletores.ts` — seletores por âncora language-neutral
-    (`#about/#experience/#education/#skills`), idioma por rótulos PT/EN (empate→PT), matriz
-    EstadoDaSecao e Foto real vs placeholder. AC-5 coberto só na metade jsdom (lê texto pleno do nó,
-    **não clica**); o clique/expandir é E2E (#7).
-- **DECISÃO (2026-06-20): caminho (b) — fixtures/seletores PROVISÓRIOS.** Igor optou por seguir sem
-  HTML real agora. ⚠️ **Confiança falsa**: as fixtures espelham os seletores que escrevi, então passam
-  por construção — NÃO provam fidelidade ao DOM real. **Bloqueio aberto: recalibrar com HTML real**
-  (ver "Bloqueios") antes do DoD.
+  - #4: fixtures PT/EN em `src/infrastructure/extracao/fixtures/` + golden `perfil-pt-completo.expected.json`,
+    **calibradas contra a estrutura real**. Carregadas via Vite `?raw`.
+  - #5/#6/#8: ACL `ExtratorDomLinkedin` + `seletores.ts`. AC-5 coberto só na metade jsdom (lê texto pleno
+    do nó, **não clica**); o clique/expandir é E2E (#7).
+- **RECALIBRAÇÃO FEITA (2026-06-20)** — Igor forneceu HTML real (perfil próprio, PT) via clipboard →
+  `samples/amostra-perfil-pt.html` (gitignored, PII). Descoberta: o DOM é "SDUI" — classes hasheadas
+  voláteis, **sem** âncoras `#about`. Hooks estáveis adotados: `componentkey` (`…Rg<Secao>`,
+  `entity-collection-item-`), `data-testid="expandable-text-box"`, `img[src*="profile-displayphoto"]`.
+  ACL validado contra a amostra (5 exp / 2 form / skills / Sobre com parágrafos / idioma PT). `samples/**`
+  ignorado no eslint. Helpers de calibração em `samples/explore*.mjs` (gitignored).
+  ⚠️ **Risco residual:** calibrado com **1 perfil PT (o próprio, em modo de edição)**. Validar ainda:
+  perfil **EN real**, perfil de **terceiros** (sem affordances de edição), e Experiência com cargos
+  **aninhados** numa mesma empresa (hoje só itens flat). Fixture EN é sintética.
 - **Como retomar a 0003 (o que falta):**
-  1. **Recalibrar (crítico):** capturar HTML real (perfil logado, DevTools → `copy(document.querySelector('main').outerHTML)`,
-     salvar **fora do git** — PII; PT e EN). Rodar `dom-extraction-auditor` para ajustar `seletores.ts` e
-     re-derivar as fixtures/goldens a partir da estrutura real. Tirar o "PROVISÓRIO".
-  2. **Task #7:** estratégia "ver mais" no DOM vivo — quando o texto pleno **não** está no nó, clicar 1x
-     (predicado do AC-5, ADR-0006). Gate `pnpm test:e2e` (precisa de navegador).
-  3. **Task #9:** wire do content script chamando `ExtrairPerfilDaPagina` (sem egress) + E2E zero egress (AC-7).
-  4. **Task #10:** atualizar `glossary` + `context-map`; rodar `privacy-guard`; fechar o DoD.
+  1. **Task #7:** estratégia "ver mais" no DOM vivo — quando o texto pleno **não** está no nó, clicar 1x
+     (predicado do AC-5, ADR-0006; hook `[data-testid="expandable-text-button"]`). Gate `pnpm test:e2e`.
+  2. **Task #9:** wire do content script chamando `ExtrairPerfilDaPagina` (sem egress) + E2E zero egress (AC-7).
+  3. **Task #10:** atualizar `glossary` + `context-map`; rodar `privacy-guard`; fechar o DoD.
+  4. **Validar risco residual** (acima) quando houver amostras EN/terceiros.
 - **Toolchain/decisões de impl.:** pnpm via `npm i -g pnpm` (10.34.4). WXT 0.20.26 / Vite 8 / React 19 /
   eslint 10 / vitest 4 / playwright 1.61. `srcDir: 'src'`; entrypoints finos em `src/entrypoints/`
   delegam para `src/interfaces/`. `tsconfig` precisou de `jsx: react-jsx` (o `.wxt/tsconfig` não o injeta).
@@ -65,9 +66,8 @@ alwaysApply: true
 - 2026-06-20: MVP = Pontuação + Checklist + Reescrita de Headline/"Sobre"; PT+EN; Chrome primeiro.
 
 ## Bloqueios
-- [ ] **0003 — recalibração com HTML real (alto).** Seletores e fixtures são provisórios (caminho (b));
-      passam por construção, sem prova de fidelidade. Destrava com: amostra de HTML real (PT/EN) do
-      Igor + passada do `dom-extraction-auditor`. Não marcar o DoD da 0003 antes disso.
+- [x] ~~0003 — recalibração com HTML real~~ **RESOLVIDO (2026-06-20)** com amostra PT real do Igor.
+      Risco residual (EN/terceiros/itens aninhados) rastreado em "Em andamento", não bloqueia #7/#9/#10.
 - [ ] (baixo) Decisões pendentes: nome/marca open source definitivo; licença — proposta MIT.
 
 ## Ideias adiadas / backlog técnico
