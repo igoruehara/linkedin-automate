@@ -10,7 +10,7 @@ alwaysApply: true
 > todo. Diferente do **ADR** (decisão durável e imutável). Decisão estrutural → ADR; estado do
 > trabalho → aqui. Atualize ao **pausar/encerrar**; leia ao **retomar**. Use a skill `/handoff`.
 
-**Última atualização:** 2026-06-20 por Igor — **0003 PAUSADA** após tasks #1–#2 (aguarda amostra de HTML real)
+**Última atualização:** 2026-06-20 por Igor — **0003**: andaime do ACL pronto (tasks #1–#6,#8 done, seletores/fixtures PROVISÓRIOS); faltam #7/#9 (E2E) e #10 + recalibração com HTML real
 
 ## Em andamento / próximo passo
 > O que está aberto agora e a **próxima ação concreta** (não "continuar a feature" — diga o passo).
@@ -29,24 +29,28 @@ alwaysApply: true
   product, design, domain, spec (8 ACs), tasks (10). **ADR-0006** criado (expandir UI = leitura, refina o
   ADR-0003). Glossário semeado (Perfil/Seção/TipoDeSeção/EstadoDaSeção/Conteúdo/Idioma/ExtratorDePerfil).
   Decisões: jsdom p/ testes do ACL; chaves canônicas neutras de idioma; núcleo de 6 Seções.
-- **0003 em implementação:** **tasks #1 e #2 done** — agregado `Perfil` (`domain/perfil/`: Idioma,
-  TipoDeSecao, EstadoDaSecao, Conteudo, Secao, Perfil + invariantes) e porta `ExtratorDePerfil` +
-  caso de uso `ExtrairPerfilDaPagina` (`application/extracao/`). 12 testes verdes; lint/typecheck OK.
-  **Nada commitado ainda.** Identificadores em ASCII (TipoDeSecao), termo acentuado fica nos docs.
-- **BLOQUEIO para tasks #4–#9:** o ACL (seletores) e as fixtures precisam de **HTML real de perfil
-  do LinkedIn** (PT/EN). Não dá para inventar seletores. Decisão pendente do Igor: (a) salvar o HTML
-  do próprio perfil e fornecer, ou (b) seguir com fixtures representativas marcadas como provisórias
-  (a calibrar depois com o `dom-extraction-auditor`).
-- **PAUSADA conscientemente** (decisão do Igor): commit do progresso e retomar quando houver a amostra.
-- **Como retomar a 0003 (passo a passo):**
-  1. Capturar a amostra real: no perfil logado, DevTools Console → `copy(document.querySelector('main').outerHTML)`
-     → salvar como `amostra-perfil.html` (deixar **fora do git** — contém PII). Idealmente PT e EN.
-  2. Task #3: adicionar `jsdom` (devDep) + `// @vitest-environment jsdom` nos testes de `infrastructure/`.
-  3. Task #4: derivar das amostras as fixtures **anonimizadas** (dados fake, estrutura real) + golden `*.expected.json`.
-  4. Tasks #5–#8: implementar o ACL `ExtratorDomLinkedin` em `src/infrastructure/extracao/` (seletores,
-     idioma→chaves canônicas, EstadoDaSecao, "ver mais" com predicado do AC-5, Foto).
-  5. Tasks #9–#10: wire no content script (chama `ExtrairPerfilDaPagina`, sem egress) + E2E zero egress;
-     rodar `privacy-guard` e `dom-extraction-auditor`; atualizar DoD.
+- **0003 em implementação — tasks #1,#2,#3,#4,#5,#6,#8 done; commitadas** (`04a5da3` #1–#2; `6c83873`
+  jsdom #3; `20c3b1c` ACL #4–#6,#8). 19 testes verdes; lint/typecheck OK. **(branch ainda sem push.)**
+  - #1/#2: agregado `Perfil` (`domain/perfil/`) + porta `ExtratorDePerfil` + caso de uso `ExtrairPerfilDaPagina`.
+  - #3: `jsdom` (devDep) via docblock `// @vitest-environment jsdom`; default do Vitest segue `node`.
+  - #4: fixtures PT/EN em `src/infrastructure/extracao/fixtures/` (completo, sem-sobre, sobre-vazio,
+    sobre-recolhido, com/sem-foto) + golden `perfil-pt-completo.expected.json`. Carregadas via Vite `?raw`.
+  - #5/#6/#8: ACL `ExtratorDomLinkedin` + `seletores.ts` — seletores por âncora language-neutral
+    (`#about/#experience/#education/#skills`), idioma por rótulos PT/EN (empate→PT), matriz
+    EstadoDaSecao e Foto real vs placeholder. AC-5 coberto só na metade jsdom (lê texto pleno do nó,
+    **não clica**); o clique/expandir é E2E (#7).
+- **DECISÃO (2026-06-20): caminho (b) — fixtures/seletores PROVISÓRIOS.** Igor optou por seguir sem
+  HTML real agora. ⚠️ **Confiança falsa**: as fixtures espelham os seletores que escrevi, então passam
+  por construção — NÃO provam fidelidade ao DOM real. **Bloqueio aberto: recalibrar com HTML real**
+  (ver "Bloqueios") antes do DoD.
+- **Como retomar a 0003 (o que falta):**
+  1. **Recalibrar (crítico):** capturar HTML real (perfil logado, DevTools → `copy(document.querySelector('main').outerHTML)`,
+     salvar **fora do git** — PII; PT e EN). Rodar `dom-extraction-auditor` para ajustar `seletores.ts` e
+     re-derivar as fixtures/goldens a partir da estrutura real. Tirar o "PROVISÓRIO".
+  2. **Task #7:** estratégia "ver mais" no DOM vivo — quando o texto pleno **não** está no nó, clicar 1x
+     (predicado do AC-5, ADR-0006). Gate `pnpm test:e2e` (precisa de navegador).
+  3. **Task #9:** wire do content script chamando `ExtrairPerfilDaPagina` (sem egress) + E2E zero egress (AC-7).
+  4. **Task #10:** atualizar `glossary` + `context-map`; rodar `privacy-guard`; fechar o DoD.
 - **Toolchain/decisões de impl.:** pnpm via `npm i -g pnpm` (10.34.4). WXT 0.20.26 / Vite 8 / React 19 /
   eslint 10 / vitest 4 / playwright 1.61. `srcDir: 'src'`; entrypoints finos em `src/entrypoints/`
   delegam para `src/interfaces/`. `tsconfig` precisou de `jsx: react-jsx` (o `.wxt/tsconfig` não o injeta).
@@ -61,7 +65,10 @@ alwaysApply: true
 - 2026-06-20: MVP = Pontuação + Checklist + Reescrita de Headline/"Sobre"; PT+EN; Chrome primeiro.
 
 ## Bloqueios
-- [ ] Nenhum bloqueio. (Decisões pendentes de baixo risco: nome/marca open source definitivo; licença — proposta MIT.)
+- [ ] **0003 — recalibração com HTML real (alto).** Seletores e fixtures são provisórios (caminho (b));
+      passam por construção, sem prova de fidelidade. Destrava com: amostra de HTML real (PT/EN) do
+      Igor + passada do `dom-extraction-auditor`. Não marcar o DoD da 0003 antes disso.
+- [ ] (baixo) Decisões pendentes: nome/marca open source definitivo; licença — proposta MIT.
 
 ## Ideias adiadas / backlog técnico
 - Reporte de erro **opt-in anônimo** → reconsiderar na Onda 3 (sinal de bugs sem ferir privacidade).
