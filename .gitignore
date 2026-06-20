@@ -16,6 +16,10 @@ playwright-report/
 test-results/
 .playwright/
 
+# Amostras de HTML real do LinkedIn p/ recalibrar o ACL (contêm PII — NUNCA vão pro git).
+# As fixtures versionadas em src/**/fixtures são ANONIMIZADAS; estas aqui são as cruas.
+samples/
+
 # Ambiente / segredos (a Chave de IA NUNCA vai pro git)
 .env
 .env.*
