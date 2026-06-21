@@ -10,7 +10,7 @@ alwaysApply: true
 > todo. Diferente do **ADR** (decisão durável e imutável). Decisão estrutural → ADR; estado do
 > trabalho → aqui. Atualize ao **pausar/encerrar**; leia ao **retomar**. Use a skill `/handoff`.
 
-**Última atualização:** 2026-06-20 por Igor — **0003**: ACL CALIBRADO com HTML real (tasks #1–#6,#8 done); faltam #7/#9 (E2E) e #10. Pushado até `7a6f792`
+**Última atualização:** 2026-06-20 por Igor — **0003**: ACL calibrado + content script costurado (tasks #1–#6,#8,#9 done; E2E zero-egress verde); faltam só #7 (clicar "ver mais") e #10
 
 ## Em andamento / próximo passo
 > O que está aberto agora e a **próxima ação concreta** (não "continuar a feature" — diga o passo).
@@ -46,12 +46,20 @@ alwaysApply: true
   ⚠️ **Risco residual:** calibrado com **1 perfil PT (o próprio, em modo de edição)**. Validar ainda:
   perfil **EN real**, perfil de **terceiros** (sem affordances de edição), e Experiência com cargos
   **aninhados** numa mesma empresa (hoje só itens flat). Fixture EN é sintética.
+- **#9 DONE (2026-06-20)** — `interfaces/content/run.ts` compõe `ExtratorDomLinkedin` + `ExtrairPerfilDaPagina`
+  e extrai o Perfil (leitura passiva). Sinal de execução = marcador local não-PII `data-curador-secoes`
+  ("6"); `try/catch` não quebra a página. E2E `e2e/extracao.spec.ts`: serve fixture de estrutura real
+  numa URL `linkedin.com` (content script injeta), confirma execução e **falha se houver egress** (AC-7).
+  20 unit + 2 E2E verdes. Fixture E2E em `e2e/fixtures/perfil-linkedin.html` (zero recursos externos).
 - **Como retomar a 0003 (o que falta):**
   1. **Task #7:** estratégia "ver mais" no DOM vivo — quando o texto pleno **não** está no nó, clicar 1x
      (predicado do AC-5, ADR-0006; hook `[data-testid="expandable-text-button"]`). Gate `pnpm test:e2e`.
-  2. **Task #9:** wire do content script chamando `ExtrairPerfilDaPagina` (sem egress) + E2E zero egress (AC-7).
-  3. **Task #10:** atualizar `glossary` + `context-map`; rodar `privacy-guard`; fechar o DoD.
-  4. **Validar risco residual** (acima) quando houver amostras EN/terceiros.
+     Reaproveita o harness do `e2e/extracao.spec.ts` (route → fixture com texto recolhido que só aparece
+     após clique). Hoje o ACL **não** clica; implementar a estratégia em camadas no `ExtratorDomLinkedin`.
+  2. **Task #10:** atualizar `glossary` + `context-map`; rodar `privacy-guard` (checar o marcador DOM e
+     zero egress); fechar o DoD.
+  3. **Validar risco residual:** perfil EN real, perfil de terceiros (sem affordances de edição), itens
+     de Experiência aninhados — quando houver amostras.
 - **Toolchain/decisões de impl.:** pnpm via `npm i -g pnpm` (10.34.4). WXT 0.20.26 / Vite 8 / React 19 /
   eslint 10 / vitest 4 / playwright 1.61. `srcDir: 'src'`; entrypoints finos em `src/entrypoints/`
   delegam para `src/interfaces/`. `tsconfig` precisou de `jsx: react-jsx` (o `.wxt/tsconfig` não o injeta).
