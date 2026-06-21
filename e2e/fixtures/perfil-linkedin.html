@@ -1,0 +1,38 @@
+<!doctype html>
+<!--
+  Fixture E2E servida numa URL do linkedin.com (onde o content script injeta). Estrutura real
+  (componentkey / data-testid), dados FAKE e ZERO recursos externos — assim, qualquer requisição
+  de rede observada no teste só pode ter vindo da extensão (AC-7).
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Perfil — teste</title>
+  </head>
+  <body>
+    <main>
+      <section componentkey="com.linkedin.sdui.profile.card.refFAKERgTopcard">
+        <div><div><div><h2>Ana Souza</h2></div></div></div>
+        <p>Engenheira de Software | TypeScript</p>
+      </section>
+
+      <section componentkey="com.linkedin.sdui.profile.card.refFAKERgAbout">
+        <div><h2>Sobre</h2></div>
+        <p><span data-testid="expandable-text-box">Engenheira de software focada em qualidade.</span></p>
+      </section>
+
+      <section componentkey="com.linkedin.sdui.profile.card.refFAKERgExperienceTopLevelSection">
+        <div><h2>Experiência</h2></div>
+        <div data-testid="profile_ExperienceTopLevelSection_fake">
+          <div componentkey="entity-collection-item--a1">
+            <div>
+              <div><div>Engenheira de Software Sênior</div></div>
+              <p>ACME Tecnologia · Tempo integral</p>
+              <p>2021 - Presente · 3 anos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

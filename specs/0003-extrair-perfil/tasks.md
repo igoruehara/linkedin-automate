@@ -20,7 +20,7 @@ alwaysApply: false
 | 6  | ACL: mapear `EstadoDaSeção` (presente/vazia/ausente) pela matriz de decisão | AC-3,4 | 5 | `pnpm test` | **done** |
 | 7  | ACL: estratégia "ver mais" — texto pleno do nó + expandir recolhido | AC-5 | 5 | `pnpm test` + `pnpm test:e2e` | parcial (texto pleno do nó + "não clica" ✓; expandir/E2E todo) |
 | 8  | ACL: Foto real vs placeholder | AC-6 | 5 | `pnpm test` | **done** |
-| 9  | Wire content script chama `ExtrairPerfilDaPagina` (sem enviar nada) + E2E leitura/zero egress | AC-7 | 5 | `pnpm test:e2e` | todo |
+| 9  | Wire content script chama `ExtrairPerfilDaPagina` (sem enviar nada) + E2E leitura/zero egress | AC-7 | 5 | `pnpm test:e2e` | **done** |
 | 10 | Atualizar `glossary` + `context-map` + checagem `privacy-guard` (ADR-0006) | AC-7,8 | 9 | `node scripts/audit-esteira.mjs .` | todo |
 
 ## Plano de teste
